@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:17.2
+    hostname: localhost
+    restart: unless-stopped
+    stop_grace_period: 20s
+    command:
+      - -c
+      - max_connections=1000
+    ports:
+      - "127.0.0.1:5432:5432"
+    env_file:
+      - .env.dev
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres" ]
+      interval: 10s
+      timeout: 10s
+      retries: 100
+      start_period: 10s
+    networks:
+      - osint-network
+    volumes:
+      - postgres_data-dev:/var/lib/postgresql/data
+
+networks:
+  osint-network:
+    driver: bridge
+
+volumes:
+  postgres_data-dev:
+    driver: local
