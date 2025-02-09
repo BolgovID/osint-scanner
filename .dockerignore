@@ -4,4 +4,4 @@ docker/
 .gradle/
 build/
 out/
-env/
+.env*
