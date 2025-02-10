@@ -29,6 +29,8 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("io.mockk:mockk:1.12.0")
+    testImplementation("org.assertj:assertj-core:3.22.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -46,4 +48,10 @@ allOpen {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "com.ptbox.osint_web_app.OsintWebAppApplicationKt"
+    }
 }
