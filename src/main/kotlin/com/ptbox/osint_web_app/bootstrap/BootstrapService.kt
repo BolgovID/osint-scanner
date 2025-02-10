@@ -1,20 +1,32 @@
-package com.ptbox.osint_web_app.service
+package com.ptbox.osint_web_app.bootstrap
 
 import com.ptbox.osint_web_app.client.docker.DockerClient
+import com.ptbox.osint_web_app.configuration.AmassProperties
 import com.ptbox.osint_web_app.entity.ScanStatus
+import com.ptbox.osint_web_app.service.ScanInfoService
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Service
 
 @Service
-class ScanRecoveryService(
+class BootstrapService(
     private val scanInfoService: ScanInfoService,
-    private val dockerClient: DockerClient
+    private val dockerClient: DockerClient,
+    private val amassProperties: AmassProperties,
 ) : CommandLineRunner {
-    private val logger = LoggerFactory.getLogger(ScanRecoveryService::class.java)
+    private val logger = LoggerFactory.getLogger(BootstrapService::class.java)
 
     override fun run(vararg args: String?) {
         recoverFailedContainers()
+        prepareOsintTool()
+    }
+
+    private fun prepareOsintTool() {
+        val imageName = amassProperties.getImageIdentifier()
+        if (!dockerClient.imageExists(imageName)) {
+            logger.info("Image $imageName not exist. Initiate pulling")
+            dockerClient.pullImage(imageName)
+        }
     }
 
     private fun recoverFailedContainers() {

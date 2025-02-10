@@ -7,7 +7,7 @@ class ImageExistsDockerCommand(
 ) : DockerCommand<Boolean> {
     override fun execute(): Boolean {
         return DockerExecutor.runCommand(listOf("docker", "images", "-q", imageName))
-            .toBooleanStrictOrNull() ?: false
+            .isNotEmpty()
 
     }
 }
