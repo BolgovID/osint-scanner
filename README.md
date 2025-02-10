@@ -16,7 +16,7 @@ managing scan processes, monitoring statuses, and retrieving detailed scan infor
 Clone the repository:
 
 ```bash
-git https://github.com/BolgovID/osint-scanner.git
+git clone https://github.com/BolgovID/osint-scanner.git
 cd osint-scanner
 ```
 
