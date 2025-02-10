@@ -49,9 +49,3 @@ allOpen {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-tasks.withType<Jar> {
-    manifest {
-        attributes["Main-Class"] = "com.ptbox.osint_web_app.OsintWebAppApplicationKt"
-    }
-}

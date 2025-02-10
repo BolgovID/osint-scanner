@@ -79,7 +79,7 @@ To create a JAR file, run the following command:docker run -d --rm --env-file .e
 Once the JAR file is created, you can run the application using:
 
 ```bash
-java -jar build/libs/*.jar
+env $(cat .env.dev | xargs) java -jar build/libs/osint-web-app-0.0.1-SNAPSHOT.jar
 ```
 
 ## Run with Docker container
