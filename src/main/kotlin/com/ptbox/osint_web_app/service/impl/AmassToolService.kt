@@ -39,8 +39,6 @@ class AmassToolService(
 
             if (exitCode == 0) {
                 onSuccess(containerId)
-            } else {
-                onFailure(containerId, "Exit code: $exitCode")
             }
         } catch (e: Exception) {
             logger.error("Error processing scan logs for container $containerId", e)

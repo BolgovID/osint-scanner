@@ -9,9 +9,15 @@ class WaitDockerCommand(
     private val logger = LoggerFactory.getLogger(WaitDockerCommand::class.java)
 
     override fun execute(): Int {
-        val exitCode = DockerExecutor.runCommand(listOf("docker", "wait", containerId))
-            .toIntOrNull() ?: -1
-        logger.debug("Container $containerId exited with code $exitCode")
-        return exitCode
+        try {
+            val exitCode = DockerExecutor.runCommand(listOf("docker", "wait", containerId))
+                .toIntOrNull() ?: -1
+            logger.debug("Container $containerId exited with code $exitCode")
+            return exitCode
+        } catch (e: Exception) {
+            logger.warn("Docker daemon: ${e.message}")
+            return -1
+        }
+
     }
 }
