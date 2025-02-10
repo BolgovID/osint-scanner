@@ -5,10 +5,10 @@ import com.ptbox.osint_web_app.service.OsintJobService
 import com.ptbox.osint_web_app.service.ScanInfoService
 import org.slf4j.LoggerFactory
 
-abstract class OsintJobLifecycleService(
+abstract class OsintToolLifecycleService(
     private val scanInfoService: ScanInfoService
 ) : OsintJobService {
-    private val logger = LoggerFactory.getLogger(OsintJobLifecycleService::class.java)
+    private val logger = LoggerFactory.getLogger(OsintToolLifecycleService::class.java)
 
     fun onSuccess(containerId: String) {
         scanInfoService.updateStatusByContainerId(containerId, ScanStatus.SUCCESS)

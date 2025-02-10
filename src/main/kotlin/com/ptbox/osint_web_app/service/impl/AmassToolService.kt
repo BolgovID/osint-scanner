@@ -7,12 +7,12 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service
-class AmassJobService(
+class AmassToolService(
     private val dockerClient: DockerClient,
     private val amassProperties: AmassProperties,
     private val scanInfoService: ScanInfoService,
-) : OsintJobLifecycleService(scanInfoService) {
-    private val logger = LoggerFactory.getLogger(AmassJobService::class.java)
+) : OsintToolLifecycleService(scanInfoService) {
+    private val logger = LoggerFactory.getLogger(AmassToolService::class.java)
 
     override fun initScanning(domain: String): String {
         if (!dockerClient.imageExists(amassProperties.getImageIdentifier())) {
