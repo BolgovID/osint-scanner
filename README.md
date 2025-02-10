@@ -68,7 +68,7 @@ This will compile the project and prepare the necessary dependencies.
 
 ### 5. Make jar
 
-To create a JAR file, run the following command:docker run -d --rm --env-file .env.dev osint-web
+To create a JAR file, run the following command:
 
 ```bash
 ./gradlew bootJar
